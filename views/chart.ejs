@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/chart.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0" defer></script>
+    <script src="/js/script.js" defer></script>
+    <title>Grafico di ...</title>
+</head>
+
+<body>
+    <%- include("partials/navbar", { charts }) %>
+    <main>
+        <canvas id="chart"></canvas>
+    </main>
+    <div style="display: none;" id="chart-data" data-chartdata=<%= data %>></div>
+</body>
+
+</html>

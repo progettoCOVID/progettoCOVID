@@ -1,0 +1,17 @@
+<header>
+    <div id="user">
+        <a href="/">
+            <img src="/assets/avatar.jpg" alt="userAvatar" id="userAvatar">
+        </a>
+    </div>
+    <nav id="charts">
+        <% charts.forEach(chart => { %>
+            <a href="/chart/<%= chart.id %>" class="nav-chart">
+                <span class="nav-chart-name"><%= chart.name %></span>
+                <div class="nav-chart-logo">
+                    <img src="/assets/pie-chart-logo.png" alt="chartLogo">
+                </div>
+            </a>
+        <% }); %>
+    </nav>
+</header>
