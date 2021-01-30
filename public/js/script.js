@@ -18,8 +18,8 @@ chartData.forEach(el => {
     let tmp = el.split('-');
     // giorno mese - 20 || es. 15 Luglio - 20
     let month = months[months_restr.indexOf(tmp[1])];
-    let day = (tmp[0] < 10)? '0'+tmp[0] : tmp[0];
-    dataX.push(`${day} ${month} - ${tmp[2]}`);
+    // let day = (tmp[0] < 10)? '0'+tmp[0] : tmp[0];
+    dataX.push(`${tmp[0]} ${month} - ${tmp[2]}`);
 })
 // console.log(dataX);
 
