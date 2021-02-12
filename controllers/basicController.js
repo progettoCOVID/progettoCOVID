@@ -2,26 +2,31 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database('./db/tabella.db')
 const charts = require('../fakedbchart');
-const app = express()
+const idroxController = require('../controllers/idroxController')
+const glicoController = require('../controllers/glicoController')
+const ossigenoController = require('../controllers/ossigenoController')
+const farm = require('../controllers/farmaciController')
 
-//idrox
-var nslDate = [{}]
-var nslDateGlico = [{}]
-var nslDateOssigeno = [{}]
-db.serialize(() => {
+/* const app = express() */
+
+/* var nslDate = [{}] */
+/* var nslDateGlico = [{}] */
+/* var nslDateOssigeno = [{}] */
+
+/* db.serialize(() => {
     let i = 0;
     db.each("SELECT prs_date, prs_nsl_num " +
                 "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.frmc_num = Prescrizioni.prs_frmc_id " +
                 "WHERE Farmaci.frmc_atc5 = 'IDROXICLOROCHINA'", (err, row) => {
         i++;
         nslDate.push(row['prs_date'].split(' ')[0] + "," + row['prs_nsl_num'])
-    })
+    }) 
     db.each("SELECT prs_date, prs_nsl_num " +
                 "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.frmc_num = Prescrizioni.prs_frmc_id " +
                 "WHERE Farmaci.frmc_atc5 LIKE 'Desamentasone%' OR Farmaci.frmc_atc5 LIKE '%predniso%'", (err, row) => {
         i++;
         nslDateGlico.push(row['prs_date'].split(' ')[0] + "," + row['prs_nsl_num'])
-    })
+    }) 
     db.each("SELECT prs_date, prs_nsl_num " +
                 "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.frmc_num = Prescrizioni.prs_frmc_id " +
                 "WHERE Farmaci.frmc_atc5 LIKE '%ossigeno%'", (err, row) => {
@@ -29,7 +34,7 @@ db.serialize(() => {
         nslDateOssigeno.push(row['prs_date'].split(' ')[0] + "," + row['prs_nsl_num'])
     })
 })
-db.close();
+db.close(); */
 
 const chartsArray = [];
 for(const chart in charts) {
@@ -42,9 +47,10 @@ exports.get_home = (req, res) => {
 }
 
 exports.get_charts = (req, res) => {
-    const dataIdrox = get_idrox();
-    const dataGlico = get_glico();
-    const dataOssigeno = get_ossigeno();
+    // const dataIdrox = farm.get_dates('Farmaci.frmc_atc5 = \'IDROXICLOROCHINA\'');
+    const dataIdrox = idroxController.get_dates();
+    const dataGlico = glicoController.get_dates();
+    const dataOssigeno = ossigenoController.get_dates();
     res.render("chart", { id: req.params.id, 
                             charts: chartsArray, 
                             dataIdrox: dataIdrox,
@@ -52,7 +58,7 @@ exports.get_charts = (req, res) => {
                             dataOssigeno: dataOssigeno});
 }
 
-const get_idrox = () => {
+/* const get_idrox = () => {
     var nslDateString = JSON.stringify({nslDate})
     return nslDateString
 }
@@ -65,4 +71,4 @@ const get_glico = () => {
 const get_ossigeno = () => {
     var nslDateStringOssigeno = JSON.stringify({nslDateOssigeno})
     return nslDateStringOssigeno
-}
+} */

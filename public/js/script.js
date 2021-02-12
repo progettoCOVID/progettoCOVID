@@ -1,9 +1,11 @@
+// import { getX, getY, getDates } from './getChartValues.js';
+
 let chartDataIdrox = document.getElementById("chart-data").dataset.chartidrox;
 let chartDataGlico = document.getElementById("chart-data").dataset.chartglico;
 let chartDataOssigeno = document.getElementById("chart-data").dataset.chartossigeno;
 
 chartDataIdrox = JSON.parse(chartDataIdrox)
-chartDataIdrox = Object.values(chartDataIdrox['nslDate'])
+chartDataIdrox = Object.values(chartDataIdrox['nslDateIdrox'])
 
 chartDataGlico = JSON.parse(chartDataGlico)
 chartDataGlico = Object.values(chartDataGlico['nslDateGlico'])
@@ -17,152 +19,83 @@ const months_restr = ['GEN', 'FEB', 'MAR', 'APR', 'MAG', 'GIU', 'LUG', 'AGO', 'S
 const days_in_months = ['31', '29', '31', '30', '31', '30', '31', '31', '30', '31', '30', '31'];
 
 
+const getX = chartData => {
+    let dataX = [];
+    chartData.forEach(el => {
+        el = el + ''
+        el = el.split(",")
 
-
-/* IDROX X */
-let dataXIdrox = [];
-chartDataIdrox.forEach(el => {
-    el = el + ''
-    el = el.split(",")
-
-    let tmp = el[0].split('-');
-    // giorno mese - 20 || es. 15 Luglio - 20
-    let month = months[months_restr.indexOf(tmp[1])];
-    // let day = (tmp[0] < 10)? '0'+tmp[0] : tmp[0];
-    dataXIdrox.push(`${tmp[0]}-${month}-${tmp[2]}20`);
-})
-dataXIdrox.splice(0, 1)
-dataXIdrox = [... new Set(dataXIdrox)]
-
-/* IDROX Y */
-let dataYIdrox = []
-for(i = 0; i < dataXIdrox.length; i++){
-    dataYIdrox.push(0)
+        let tmp = el[0].split('-');
+        // giorno mese - 20 || es. 15 Luglio - 20
+        let month = months[months_restr.indexOf(tmp[1])];
+        dataX.push(`${tmp[0]}-${month}-${tmp[2]}20`);
+    })
+    dataX.splice(0, 1)
+    dataX = [... new Set(dataX)]
+    return dataX;
 }
+
+const getY = (dataX, chartData) => {
+    let dataY = [];
+    dataX.forEach(() => dataY.push(0))
+    dataX.forEach(dx => {
+        chartData.forEach(el => {
+            el = el + ''
+            el = el.split(",")
+            let tmp = el[0].split('-')
+            let month = months[months_restr.indexOf(tmp[1])];
+            if (JSON.stringify(dx) === JSON.stringify(`${tmp[0]}-${month}-${tmp[2]}20`)) {
+                dataY[dataX.indexOf(dx)] += 1
+            }
+        })
+    })
+    return dataY;
+}
+
+const getDates = (dataX, dataY) => {
+    let dates = [];
+    for (i = 0; i < dataX.length; i++) {
+        let obj = {};
+        obj.x = new Date(dataX[i].split('-')[2], dataX[i].split('-')[1], dataX[i].split('-')[0]);
+        obj.y = dataY[i]
+        dates.push(obj);
+    }
+    return dates;
+}
+
+
+
+/* IDROX */
+let dataXIdrox = getX(chartDataIdrox);
+let dataYIdrox = getY(dataXIdrox, chartDataIdrox)
+var datesIdrox = getDates(dataXIdrox, dataYIdrox)
+
 console.log(dataYIdrox.length + ' - ' + dataXIdrox.length)
-dataXIdrox.forEach(dx => {
-    chartDataIdrox.forEach(el => {
-        el = el + ''
-        el = el.split(",")
-        let tmp = el[0].split('-')
-        let month = months[months_restr.indexOf(tmp[1])];
-        if(JSON.stringify(dx) === JSON.stringify(`${tmp[0]}-${month}-${tmp[2]}20`)){
-            dataYIdrox[dataXIdrox.indexOf(dx)] += 1
-        }
-    })
-})
-
-// IDROX
-var datesIdrox = [];
-for(i=0; i < dataXIdrox.length; i++){
-    let obj = {};
-    obj.x = new Date(dataXIdrox[i].split('-')[2], dataXIdrox[i].split('-')[1], dataXIdrox[i].split('-')[0]);
-    obj.y = dataYIdrox[i]
-    datesIdrox.push(obj);
-}
 
 
 
+/* GLICO */
+let dataXGlico = getX(chartDataGlico)
+let dataYGlico = getY(dataXGlico, chartDataGlico)
+var datesGlico = getDates(dataXGlico, dataYGlico)
 
-
-/* GLICO X */
-let dataXGlico = [];
-chartDataGlico.forEach(el => {
-    el = el + ''
-    el = el.split(",")
-
-    let tmp = el[0].split('-');
-    // giorno mese - 20 || es. 15 Luglio - 20
-    let month = months[months_restr.indexOf(tmp[1])];
-    // let day = (tmp[0] < 10)? '0'+tmp[0] : tmp[0];
-    dataXGlico.push(`${tmp[0]}-${month}-${tmp[2]}20`);
-})
-dataXGlico.splice(0, 1)
-dataXGlico = [... new Set(dataXGlico)]
-
-/* GLICO Y */
-let dataYGlico = []
-for(i = 0; i < dataXGlico.length; i++){
-    dataYGlico.push(0)
-}
 console.log(dataYGlico.length + ' - ' + dataXGlico.length)
-dataXGlico.forEach(dx => {
-    chartDataGlico.forEach(el => {
-        el = el + ''
-        el = el.split(",")
-        let tmp = el[0].split('-')
-        let month = months[months_restr.indexOf(tmp[1])];
-        if(JSON.stringify(dx) === JSON.stringify(`${tmp[0]}-${month}-${tmp[2]}20`)){
-            dataYGlico[dataXGlico.indexOf(dx)] += 1
-        }
-    })
-})
-
-// GLICO
-var datesGlico = [];
-for(i=0; i < dataXGlico.length; i++){
-    let obj = {};
-    obj.x = new Date(dataXGlico[i].split('-')[2], dataXGlico[i].split('-')[1], dataXGlico[i].split('-')[0]);
-    obj.y = dataYGlico[i]
-    datesGlico.push(obj);
-}
 
 
+/* OSSIGENO */
+let dataXOssigeno = getX(chartDataOssigeno)
+let dataYOssigeno = getY(dataXOssigeno, chartDataOssigeno)
+var datesOssigeno = getDates(dataXOssigeno, dataYOssigeno)
 
-
-
-/* OSSIGENO X */
-let dataXOssigeno = [];
-chartDataOssigeno.forEach(el => {
-    el = el + ''
-    el = el.split(",")
-
-    let tmp = el[0].split('-');
-    // giorno mese - 20 || es. 15 Luglio - 20
-    let month = months[months_restr.indexOf(tmp[1])];
-    // let day = (tmp[0] < 10)? '0'+tmp[0] : tmp[0];
-    dataXOssigeno.push(`${tmp[0]}-${month}-${tmp[2]}20`);
-})
-dataXOssigeno.splice(0, 1)
-dataXOssigeno = [... new Set(dataXOssigeno)]
-
-/* OSSIGENO Y */
-let dataYOssigeno = []
-for(i = 0; i < dataXOssigeno.length; i++){
-    dataYOssigeno.push(0)
-}
-console.log(dataYOssigeno.length + ' - ' + dataXOssigeno.length)
-dataXOssigeno.forEach(dx => {
-    chartDataOssigeno.forEach(el => {
-        el = el + ''
-        el = el.split(",")
-        let tmp = el[0].split('-')
-        let month = months[months_restr.indexOf(tmp[1])];
-        if(JSON.stringify(dx) === JSON.stringify(`${tmp[0]}-${month}-${tmp[2]}20`)){
-            dataYOssigeno[dataXOssigeno.indexOf(dx)] += 1
-        }
-    })
-})
-
-// OSSIGENO
-var datesOssigeno = [];
-for(i=0; i < dataXOssigeno.length; i++){
-    let obj = {};
-    obj.x = new Date(dataXOssigeno[i].split('-')[2], dataXOssigeno[i].split('-')[1], dataXOssigeno[i].split('-')[0]);
-    obj.y = dataYOssigeno[i]
-    datesOssigeno.push(obj);
-}
-
-
-
+console.log(dataXOssigeno.length + ' - ' + dataYOssigeno.length)
 
 
 
 
 const ctx = document.getElementById("chart").getContext("2d");
-var dates2Idrox = datesIdrox.sort((a,b) => b.x - a.x);
-var dates2Glico = datesGlico.sort((a,b) => b.x - a.x);
-var dates2Ossigeno = datesOssigeno.sort((a,b) => b.x - a.x);
+var dates2Idrox = datesIdrox.sort((a, b) => b.x - a.x);
+var dates2Glico = datesGlico.sort((a, b) => b.x - a.x);
+var dates2Ossigeno = datesOssigeno.sort((a, b) => b.x - a.x);
 const chart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -172,14 +105,14 @@ const chart = new Chart(ctx, {
             backgroundColor: 'red',
             fill: false,
             data: dates2Idrox
-         },
-         {
+        },
+        {
             label: 'Glicorticoidi',
             borderColor: 'yellow',
             backgroundColor: 'yellow',
             fill: false,
             data: dates2Glico
-         },
+        },
         {
             label: 'Ossigeno',
             borderColor: 'lightblue',
@@ -197,12 +130,12 @@ const chart = new Chart(ctx, {
                 },
                 type: 'time',
                 time: {
-                  displayFormats: {'day': 'MM/YY'},
-                  tooltipFormat: 'DD/MM/YY',
-                  unit: 'month',
+                    displayFormats: { 'day': 'MM/YY' },
+                    tooltipFormat: 'DD/MM/YY',
+                    unit: 'month',
                     min: '2020',
                     max: '2021'
-                 }
+                }
             }],
             yAxes: [{
                 ticks: {
