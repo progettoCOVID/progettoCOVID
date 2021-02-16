@@ -3,6 +3,9 @@
 let chartDataIdrox = document.getElementById("chart-data").dataset.chartidrox;
 let chartDataGlico = document.getElementById("chart-data").dataset.chartglico;
 let chartDataOssigeno = document.getElementById("chart-data").dataset.chartossigeno;
+let chartDataAntibiotici = document.getElementById("chart-data").dataset.chartantibiotici;
+let chartDataAntivirali = document.getElementById("chart-data").dataset.chartantivirali;
+let chartDataEparine = document.getElementById('chart-data').dataset.charteparine;
 
 chartDataIdrox = JSON.parse(chartDataIdrox)
 chartDataIdrox = Object.values(chartDataIdrox['nslDateIdrox'])
@@ -12,6 +15,15 @@ chartDataGlico = Object.values(chartDataGlico['nslDateGlico'])
 
 chartDataOssigeno = JSON.parse(chartDataOssigeno)
 chartDataOssigeno = Object.values(chartDataOssigeno['nslDateOssigeno'])
+
+chartDataAntibiotici = JSON.parse(chartDataAntibiotici)
+chartDataAntibiotici = Object.values(chartDataAntibiotici['nslDateAntibiotici'])
+
+chartDataAntivirali = JSON.parse(chartDataAntivirali)
+chartDataAntivirali = Object.values(chartDataAntivirali['nslDateAntivirali'])
+
+chartDataEparine = JSON.parse(chartDataEparine)
+chartDataEparine = Object.values(chartDataEparine['nslDateEparine'])
 
 // Gennaio, Febbraio, Marzo, Aprile, Maggio, Giugno, Luglio, Agosto, Settembre, Ottobre, Novembre, Dicembre
 const months = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
@@ -69,33 +81,47 @@ const getDates = (dataX, dataY) => {
 let dataXIdrox = getX(chartDataIdrox);
 let dataYIdrox = getY(dataXIdrox, chartDataIdrox)
 var datesIdrox = getDates(dataXIdrox, dataYIdrox)
-
-console.log(dataYIdrox.length + ' - ' + dataXIdrox.length)
-
+var dates2Idrox = datesIdrox.sort((a, b) => b.x - a.x);
 
 
 /* GLICO */
 let dataXGlico = getX(chartDataGlico)
 let dataYGlico = getY(dataXGlico, chartDataGlico)
 var datesGlico = getDates(dataXGlico, dataYGlico)
-
-console.log(dataYGlico.length + ' - ' + dataXGlico.length)
+var dates2Glico = datesGlico.sort((a, b) => b.x - a.x);
 
 
 /* OSSIGENO */
 let dataXOssigeno = getX(chartDataOssigeno)
 let dataYOssigeno = getY(dataXOssigeno, chartDataOssigeno)
 var datesOssigeno = getDates(dataXOssigeno, dataYOssigeno)
+var dates2Ossigeno = datesOssigeno.sort((a, b) => b.x - a.x);
 
-console.log(dataXOssigeno.length + ' - ' + dataYOssigeno.length)
+
+/* ANTIBIOTICI */
+let dataXAntibiotici = getX(chartDataAntibiotici)
+let dataYAntibiotici = getY(dataXAntibiotici, chartDataAntibiotici)
+var datesAntibiotici = getDates(dataXAntibiotici, dataYAntibiotici)
+var dates2Antibiotici = datesAntibiotici.sort((a, b) => b.x - a.x)
 
 
+/* ANTIVIRALI */
+let dataXAntivirali = getX(chartDataAntivirali)
+let dataYAntivirali = getY(dataXAntivirali, chartDataAntivirali)
+var datesAntivirali = getDates(dataXAntivirali, dataYAntivirali)
+var dates2Antivirali = datesAntivirali.sort((a, b) => b.x - a.x)
+
+console.log(dataXAntivirali.length + ' - ' + dataYAntivirali.length)
+
+
+/* EPARINE */
+let dataXEparine = getX(chartDataEparine)
+let dataYEparine = getY(dataXEparine, chartDataEparine)
+var datesEparine = getDates(dataXEparine, dataYEparine)
+var dates2Eparine = datesEparine.sort((a, b) => b.x - a.x)
 
 
 const ctx = document.getElementById("chart").getContext("2d");
-var dates2Idrox = datesIdrox.sort((a, b) => b.x - a.x);
-var dates2Glico = datesGlico.sort((a, b) => b.x - a.x);
-var dates2Ossigeno = datesOssigeno.sort((a, b) => b.x - a.x);
 const chart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -119,6 +145,27 @@ const chart = new Chart(ctx, {
             backgroundColor: 'lightblue',
             fill: false,
             data: dates2Ossigeno
+        },
+        {
+            label: 'Antibiotici',
+            borderColor: 'white',
+            backgroundColor: 'white',
+            fill: false,
+            data: dates2Antibiotici
+        },
+        {
+            label: 'Antivirali',
+            borderColor: '#975acf',
+            backgroundColor: '#975acf',
+            fill: false,
+            data: dates2Antivirali
+        },
+        {
+            label: 'Eparine',
+            borderColor: 'green',
+            backgroundColor: 'green',
+            fill: false,
+            data: dates2Eparine
         }],
     },
     options: {
@@ -132,9 +179,7 @@ const chart = new Chart(ctx, {
                 time: {
                     displayFormats: { 'day': 'MM/YY' },
                     tooltipFormat: 'DD/MM/YY',
-                    unit: 'month',
-                    min: '2020',
-                    max: '2021'
+                    unit: 'month'
                 }
             }],
             yAxes: [{

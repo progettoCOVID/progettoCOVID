@@ -5,36 +5,14 @@ const charts = require('../fakedbchart');
 const idroxController = require('../controllers/idroxController')
 const glicoController = require('../controllers/glicoController')
 const ossigenoController = require('../controllers/ossigenoController')
-const farm = require('../controllers/farmaciController')
+const antibioticiController = require('../controllers/antibioticiController')
+const antiviraliController = require('../controllers/antiviraliController')
+const eparineController = require('../controllers/eparineController')
+// const farm = require('../controllers/farmaciController');
 
-/* const app = express() */
+const diabeticiController = require('../controllers/diabeticiController')
+const cardiopaticiController = require('../controllers/cardiopaticiController')
 
-/* var nslDate = [{}] */
-/* var nslDateGlico = [{}] */
-/* var nslDateOssigeno = [{}] */
-
-/* db.serialize(() => {
-    let i = 0;
-    db.each("SELECT prs_date, prs_nsl_num " +
-                "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.frmc_num = Prescrizioni.prs_frmc_id " +
-                "WHERE Farmaci.frmc_atc5 = 'IDROXICLOROCHINA'", (err, row) => {
-        i++;
-        nslDate.push(row['prs_date'].split(' ')[0] + "," + row['prs_nsl_num'])
-    }) 
-    db.each("SELECT prs_date, prs_nsl_num " +
-                "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.frmc_num = Prescrizioni.prs_frmc_id " +
-                "WHERE Farmaci.frmc_atc5 LIKE 'Desamentasone%' OR Farmaci.frmc_atc5 LIKE '%predniso%'", (err, row) => {
-        i++;
-        nslDateGlico.push(row['prs_date'].split(' ')[0] + "," + row['prs_nsl_num'])
-    }) 
-    db.each("SELECT prs_date, prs_nsl_num " +
-                "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.frmc_num = Prescrizioni.prs_frmc_id " +
-                "WHERE Farmaci.frmc_atc5 LIKE '%ossigeno%'", (err, row) => {
-        i++;
-        nslDateOssigeno.push(row['prs_date'].split(' ')[0] + "," + row['prs_nsl_num'])
-    })
-})
-db.close(); */
 
 const chartsArray = [];
 for(const chart in charts) {
@@ -46,29 +24,42 @@ exports.get_home = (req, res) => {
     
 }
 
-exports.get_charts = (req, res) => {
-    // const dataIdrox = farm.get_dates('Farmaci.frmc_atc5 = \'IDROXICLOROCHINA\'');
+const get_terapietempo = req => {
     const dataIdrox = idroxController.get_dates();
     const dataGlico = glicoController.get_dates();
     const dataOssigeno = ossigenoController.get_dates();
-    res.render("chart", { id: req.params.id, 
+    const dataAntibiotici = antibioticiController.get_dates();
+    const dataEparine = eparineController.get_dates();
+    const dataAntivirali = antiviraliController.get_dates()
+    return (
+        { id: req.params.id, 
                             charts: chartsArray, 
                             dataIdrox: dataIdrox,
                             dataGlico: dataGlico,
-                            dataOssigeno: dataOssigeno});
+                            dataOssigeno: dataOssigeno,
+                            dataAntibiotici: dataAntibiotici,
+                            dataAntivirali: dataAntivirali,
+                            dataEparine: dataEparine
+                    });
 }
 
-/* const get_idrox = () => {
-    var nslDateString = JSON.stringify({nslDate})
-    return nslDateString
+const get_comorbidita = req => {
+    const dataDiabetici = diabeticiController.get_dates();
+    const dataCardiopatici = cardiopaticiController.get_dates();
+    return (
+        {
+            id: req.params.id,
+            charts: chartsArray,
+            dataDiabetici: dataDiabetici,
+            dataCardiopatici: dataCardiopatici
+        }
+    )
 }
 
-const get_glico = () => {
-    var nslDateStringGlico = JSON.stringify({nslDateGlico})
-    return nslDateStringGlico
+exports.get_charts = (req, res) => {
+    if (req.params.id === 'terapietempo') {
+        res.render("chartTerapieTempo", get_terapietempo(req))
+    } else if(req.params.id === 'comorbidita'){
+        res.render("chartComorbidita", get_comorbidita(req))
+    }
 }
-
-const get_ossigeno = () => {
-    var nslDateStringOssigeno = JSON.stringify({nslDateOssigeno})
-    return nslDateStringOssigeno
-} */

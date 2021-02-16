@@ -1,11 +1,11 @@
 {
     "chart1" : {
-        "id": 1,
+        "id": "terapietempo",
         "name" : "Terapie nel tempo",
-        "type" : "bar"
+        "type" : "line"
     },
     "chart2" : {
-        "id": 2,
+        "id": "comorbidita",
         "name" : "Comorbidità",
         "type" : "line"
     }
