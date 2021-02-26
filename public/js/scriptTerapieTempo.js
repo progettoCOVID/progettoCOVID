@@ -111,10 +111,9 @@ let dataYAntivirali = getY(dataXAntivirali, chartDataAntivirali)
 var datesAntivirali = getDates(dataXAntivirali, dataYAntivirali)
 var dates2Antivirali = datesAntivirali.sort((a, b) => b.x - a.x)
 
-console.log(dataXAntivirali.length + ' - ' + dataYAntivirali.length)
 
-
-/* EPARINE */
+/* EPARINE */ 
+/* console.log(chartDataEparine); */
 let dataXEparine = getX(chartDataEparine)
 let dataYEparine = getY(dataXEparine, chartDataEparine)
 var datesEparine = getDates(dataXEparine, dataYEparine)

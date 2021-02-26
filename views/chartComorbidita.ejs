@@ -16,6 +16,13 @@
     <%- include("partials/navbar", {charts}) %>
     <main>
         <canvas id="chart"></canvas>
+        <select>
+            <option>Pazienti Cardiopatici / Ipertensione</option>
+            <option>Diuretici</option>
+            <option>Ace Inibitori</option>
+            <option>Angiotensina</option>
+            <option>Farmaci disturbi istruttivi delle vie respiratorie</option>
+        </select>
     </main>
     <div style="display: none;" id="chart-data" 
         data-chartDiabetici="<%= dataDiabetici %>" 

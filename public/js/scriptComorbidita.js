@@ -85,14 +85,16 @@ const chart = new Chart(ctx, {
             borderColor: '#D22A85',
             backgroundColor: '#D22A85',
             fill: false,
-            data: dates2Diabetici
+            data: dates2Diabetici,
+            yAxisID: 'rightAx'
         },
         {
-            label: 'Pazienti Cardiopatici/Ipertensione',
+            label: 'Pazienti Cardiopatici / Ipertensione',
             borderColor: '#A18499',
             backgroundColor: '#A18499',
             fill: false,
-            data: dates2Cardiopatici
+            data: dates2Cardiopatici,
+            yAxisID: 'leftAx'
         }],
     },
     options: {
@@ -110,9 +112,17 @@ const chart = new Chart(ctx, {
                 }
             }],
             yAxes: [{
+                id: 'leftAx',
                 ticks: {
                     beginAtZero: true
-                }
+                },
+                position: 'left'
+            }, {
+                id: 'rightAx',
+                ticks: {
+                    beginAtZero: true
+                },
+                position: 'right'
             }]
         }
     }

@@ -5,7 +5,7 @@ var nslDateDiabetici = [{}];
 db.serialize(() => {
     db.each("SELECT prs_date, prs_nsl_num " +
         "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.frmc_num = Prescrizioni.prs_frmc_id " +
-        "WHERE Farmaci.frmc_atc2 LIKE '%diabete%' AND Farmaci.frmc_atc3 NOT LIKE '%ipoglicemizzanti%'", (err, row) => {
+        "WHERE Farmaci.frmc_atc2 LIKE '%diabete%' AND Farmaci.frmc_atc3 LIKE '%ipoglicemizzanti%'", (err, row) => {
             nslDateDiabetici.push(row['prs_date'].split(' ')[0] + "," + row['prs_nsl_num'])
         })
 });
