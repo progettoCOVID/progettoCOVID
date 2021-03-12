@@ -27,3 +27,48 @@ main {
     justify-content: space-evenly;
     padding: 0 5rem;
 }
+
+#arrowCont {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    right: 20px;
+}
+
+#arrowCont > a {
+    color: white;
+    font-size: x-large;
+    transition: .3s;
+    cursor: pointer;
+    align-self: center;
+}
+
+#arrowCont > a:hover {
+    color: #37c9ef;
+}
+
+#arrowBtn {
+    padding: 5px;
+}
+
+#info {
+    width: 40vw;
+    background: rgba(31, 31, 31, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#card {
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}

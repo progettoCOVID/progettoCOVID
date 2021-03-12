@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/chart.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0" defer></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <script src="/js/chart.js" defer></script>
+    <script src="/js/arrow.js" defer></script>
+    <title>Grafico di ...</title>
+</head>
+
+<body>
+    <%- include("partials/navbar", { charts }) %>
+        <main>
+            <canvas id="chart"></canvas>
+            <div id="arrowCont">
+                <a id="arrowBtn"><i id="iconTitle" title="Maggiori informazioni" class="fas fa-info-circle"></i></a>
+                <div id="info" class="w3-animate-right">
+                    <div id="card">
+                        <div id="carouselInfo" class="carousel slide " data-bs-ride="carousel">
+                            <div class="carousel-inner w-75 mx-auto">
+                                <div class="carousel-item active carousel" data-bs-interval="10000">
+                                    <h5>MALATTIA 1</h5>
+                                    <hr>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsum numquam soluta! Provident autem tenetur nam accusantium aliquid velit officia iste recusandae id omnis dignissimos voluptatem aspernatur vero at, nesciunt amet aut deserunt ducimus optio error odio odit aliquam reprehenderit laborum. Sed inventore ea illo autem, quod dolores tempore nisi!</p>
+                                </div>
+                                <div class="carousel-item" data-bs-interval="2000">
+                                    <h5>MALATTIA 2</h5>
+                                    <hr>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsum numquam soluta! Provident autem tenetur nam accusantium aliquid velit officia iste recusandae id omnis dignissimos voluptatem aspernatur vero at, nesciunt amet aut deserunt ducimus optio error odio odit aliquam reprehenderit laborum. Sed inventore ea illo autem, quod dolores tempore nisi!</p>
+                                </div>
+                                <div class="carousel-item">
+                                    <h5>MALATTIA 3</h5>
+                                    <hr>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsum numquam soluta! Provident autem tenetur nam accusantium aliquid velit officia iste recusandae id omnis dignissimos voluptatem aspernatur vero at, nesciunt amet aut deserunt ducimus optio error odio odit aliquam reprehenderit laborum. Sed inventore ea illo autem, quod dolores tempore nisi!</p>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselInfo"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselInfo"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div style="display: none;" id="chart-data" data-chartdata=<%=data %>></div>
+</body>
+
+</html>
