@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/chart.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0" defer></script>
+    <script src="/js/scriptTerapieTempo.js" defer></script>
+    <title>Grafico di ...</title>
+</head>
+
+<body>
+    <%- include("partials/navbar", {charts}) %>
+    <main>
+        <canvas id="chart"></canvas>
+    </main>
+    <div style="display: none;" id="chart-data" 
+        data-chartIdrox="<%= dataIdrox %>" 
+        data-chartGlico="<%= dataGlico %>" 
+        data-chartOssigeno="<%= dataOssigeno %>" 
+        data-chartAntibiotici="<%= dataAntibiotici %>" 
+        data-chartAntivirali="<%= dataAntivirali %>"
+        data-chartEparine="<%= dataEparine %>"
+    >
+    </div>
+    </div>
+</body>
+
+</html>
