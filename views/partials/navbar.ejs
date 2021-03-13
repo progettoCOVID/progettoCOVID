@@ -5,7 +5,9 @@
         </a>
     </div>
     <nav id="charts">
-        <% charts.forEach(chart => { %>
+
+        <%console.log(charts)
+         charts.forEach(chart => { %>
             <a href="/chart/<%= chart.id %>" class="nav-chart">
                 <span class="nav-chart-name"><%= chart.name %></span>
                 <div class="nav-chart-logo">

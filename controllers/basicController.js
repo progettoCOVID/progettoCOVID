@@ -9,6 +9,7 @@ const antibioticiController = require('../controllers/antibioticiController')
 const antiviraliController = require('../controllers/antiviraliController')
 const eparineController = require('../controllers/eparineController')
 // const farm = require('../controllers/farmaciController');
+const vitamiteController = require('../controllers/vitamineController')
 
 const diabeticiController = require('../controllers/diabeticiController')
 const cardiopaticiController = require('../controllers/cardiopaticiController')
@@ -31,6 +32,28 @@ const get_terapietempo = req => {
     const dataAntibiotici = antibioticiController.get_dates();
     const dataEparine = eparineController.get_dates();
     const dataAntivirali = antiviraliController.get_dates()
+    const dataVitamine = vitamiteController.get_dates();
+
+
+    const data = [
+        {
+            'name': 'Idroxiclorochina',
+            'data': JSON.parse(dataIdrox),
+            'active': 'active carousel'
+        },
+        {
+            'name': 'Glicorticoidi',
+            'data': JSON.parse(dataGlico),
+            'active': ''
+        },
+        {
+            'name': 'Ossigeno',
+            'data': JSON.parse(dataOssigeno),
+            'active': ''
+        }
+    ]
+
+
     return (
         { id: req.params.id, 
                             charts: chartsArray, 
@@ -39,7 +62,9 @@ const get_terapietempo = req => {
                             dataOssigeno: dataOssigeno,
                             dataAntibiotici: dataAntibiotici,
                             dataAntivirali: dataAntivirali,
-                            dataEparine: dataEparine
+                            dataEparine: dataEparine,
+                            dataVitamine: dataVitamine,
+                            data: data
                     });
 }
 

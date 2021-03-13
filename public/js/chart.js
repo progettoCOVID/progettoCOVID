@@ -1,6 +1,6 @@
 let chartData = document.getElementById("chart-data").dataset.chartdata;
 chartData = Array.from(chartData.split(","));
-console.log(typeof chartData, chartData);
+/* console.log(typeof chartData, chartData); */
 
 const ctx = document.getElementById("chart").getContext("2d");
 const chart = new Chart(ctx, {

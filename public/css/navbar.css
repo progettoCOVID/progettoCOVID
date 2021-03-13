@@ -4,7 +4,6 @@ header {
     width: 15vw;
     height: 100vh;
     background: #37c9ef;
-    overflow: hidden;
     z-index: 99;
 
 }

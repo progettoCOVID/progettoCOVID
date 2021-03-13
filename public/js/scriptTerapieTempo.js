@@ -5,7 +5,8 @@ let chartDataGlico = document.getElementById("chart-data").dataset.chartglico;
 let chartDataOssigeno = document.getElementById("chart-data").dataset.chartossigeno;
 let chartDataAntibiotici = document.getElementById("chart-data").dataset.chartantibiotici;
 let chartDataAntivirali = document.getElementById("chart-data").dataset.chartantivirali;
-let chartDataEparine = document.getElementById('chart-data').dataset.charteparine;
+let chartDataVitamine = document.getElementById('chart-data').dataset.chartvitamine;
+//let chartDataEparine = document.getElementById('chart-data').dataset.charteparine;
 
 chartDataIdrox = JSON.parse(chartDataIdrox)
 chartDataIdrox = Object.values(chartDataIdrox['nslDateIdrox'])
@@ -22,8 +23,11 @@ chartDataAntibiotici = Object.values(chartDataAntibiotici['nslDateAntibiotici'])
 chartDataAntivirali = JSON.parse(chartDataAntivirali)
 chartDataAntivirali = Object.values(chartDataAntivirali['nslDateAntivirali'])
 
-chartDataEparine = JSON.parse(chartDataEparine)
-chartDataEparine = Object.values(chartDataEparine['nslDateEparine'])
+chartDataVitamine = JSON.parse(chartDataVitamine)
+chartDataVitamine = Object.values(chartDataVitamine['nslDateVitamine']);
+
+/* chartDataEparine = JSON.parse(chartDataEparine)
+chartDataEparine = Object.values(chartDataEparine['nslDateEparine']) */
 
 // Gennaio, Febbraio, Marzo, Aprile, Maggio, Giugno, Luglio, Agosto, Settembre, Ottobre, Novembre, Dicembre
 const months = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
@@ -114,10 +118,18 @@ var dates2Antivirali = datesAntivirali.sort((a, b) => b.x - a.x)
 
 /* EPARINE */ 
 /* console.log(chartDataEparine); */
-let dataXEparine = getX(chartDataEparine)
+/* let dataXEparine = getX(chartDataEparine)
 let dataYEparine = getY(dataXEparine, chartDataEparine)
 var datesEparine = getDates(dataXEparine, dataYEparine)
-var dates2Eparine = datesEparine.sort((a, b) => b.x - a.x)
+var dates2Eparine = datesEparine.sort((a, b) => b.x - a.x) */
+
+
+/* VITAMINE */
+let dataXVitamine = getX(chartDataVitamine)
+let dataYVitamine = getY(dataXVitamine, chartDataVitamine)
+var datesVitamine = getDates(dataXVitamine, dataYVitamine)
+var dates2Vitamine = datesVitamine.sort((a, b) => b.x - a.x)
+
 
 
 const ctx = document.getElementById("chart").getContext("2d");
@@ -159,12 +171,19 @@ const chart = new Chart(ctx, {
             fill: false,
             data: dates2Antivirali
         },
-        {
+        /* {
             label: 'Eparine',
             borderColor: 'green',
             backgroundColor: 'green',
             fill: false,
             data: dates2Eparine
+        } */
+        {
+            label: 'Vitamine',
+            borderColor: '#4AE54A',
+            backgroundColor: '#4AE54A',
+            fill: false,
+            data: dates2Vitamine
         }],
     },
     options: {

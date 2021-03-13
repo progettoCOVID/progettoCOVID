@@ -3,10 +3,10 @@ const db = new sqlite3.Database('./db/tabella.db');
 
 var nslDateCardiopatici = [{}];
 db.serialize(() => {
-    db.each("SELECT prs_date, prs_nsl_num " +
-        "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.frmc_num = Prescrizioni.prs_frmc_id " +
-        "WHERE Farmaci.frmc_atc2 LIKE '%cardi%' OR Farmaci.frmc_atc2 LIKE '%ipertens%' OR Farmaci.frmc_atc2 LIKE '%betabloccanti%' OR Farmaci.frmc_atc2 LIKE '%calcio-antagonisti%'", (err, row) => {
-            nslDateCardiopatici.push(row['prs_date'].split(' ')[0] + "," + row['prs_nsl_num'])
+    db.each("SELECT DataSomministrazione, Nosologico " +
+        "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.Codice = Prescrizioni.CodiceFarmaco " +
+        "WHERE Farmaci.ATC2 LIKE '%cardi%' OR Farmaci.ATC2 LIKE '%ipertens%' OR Farmaci.ATC2 LIKE '%betabloccanti%' OR Farmaci.ATC2 LIKE '%calcio-antagonisti%'", (err, row) => {
+            nslDateCardiopatici.push(row['DataSomministrazione'].split(' ')[0] + "," + row['Nosologico'])
         })
 });
 db.close();

@@ -4,11 +4,11 @@ const db = new sqlite3.Database('./db/tabella.db');
 var nslDateIdrox = [{}];
 db.serialize(() => {
     db.each(
-        'SELECT prs_date, prs_nsl_num ' +
-        'FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.frmc_num = Prescrizioni.prs_frmc_id ' +
-        "WHERE Farmaci.frmc_atc5 = 'IDROXICLOROCHINA'",
+        'SELECT DataSomministrazione, Nosologico ' +
+        'FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.Codice = Prescrizioni.CodiceFarmaco ' +
+        "WHERE Farmaci.ATC5 = 'IDROXICLOROCHINA'",
         (err, row) => {
-            nslDateIdrox.push(row['prs_date'].split(' ')[0] + ',' + row['prs_nsl_num']);
+            nslDateIdrox.push(row['DataSomministrazione'].split(' ')[0] + ',' + row['Nosologico']);
         }
     );
 });

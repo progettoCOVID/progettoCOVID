@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/chart/:id', (req, res) => {
-    res.render("chart", {id: req.params.id, charts:chartsArray, data: [19,21]});
+    res.render("chart", {id: req.params.id, charts: chartsArray});
 })
 
 app.listen(PORT, () => {

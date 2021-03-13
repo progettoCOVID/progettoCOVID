@@ -21,9 +21,10 @@ body {
 main {
     flex: 1;
     flex-direction: column;
-    height: 100vh;
+    height: 70vh;
     display: flex;
     align-items: center;
+    width: 85vw;
     justify-content: space-evenly;
     padding: 0 5rem;
 }

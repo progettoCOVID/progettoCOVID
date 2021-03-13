@@ -3,10 +3,10 @@ const db = new sqlite3.Database('./db/tabella.db');
 
 var nslDateAntibiotici = [{}];
 db.serialize(() => {
-    db.each("SELECT prs_date, prs_nsl_num " +
-        "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.frmc_num = Prescrizioni.prs_frmc_id " +
-        "WHERE Farmaci.frmc_atc5 LIKE 'Ertapenem' OR Farmaci.frmc_atc5 LIKE 'Ceftriaxone'", (err, row) => {
-            nslDateAntibiotici.push(row['prs_date'].split(' ')[0] + "," + row['prs_nsl_num'])
+    db.each("SELECT DataSomministrazione, Nosologico " +
+        "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.Codice = Prescrizioni.CodiceFarmaco " +
+        "WHERE Farmaci.ATC5 LIKE 'Ertapenem' OR Farmaci.ATC5 LIKE 'Ceftriaxone'", (err, row) => {
+            nslDateAntibiotici.push(row['DataSomministrazione'].split(' ')[0] + "," + row['Nosologico'])
         })
 });
 db.close();
