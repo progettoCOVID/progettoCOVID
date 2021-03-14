@@ -39,34 +39,17 @@
 
                         
                             <% data.forEach((d, index) => { %>
-                                <% console.log(index + ' >' + d.active + '< ' ) %>
-                                <div class=`carousel-item ${d.active}` data-bs-interval="10000">
+                                <% console.log(index + ' >' + d.data + '< ' ) %>
+                                <div class="carousel-item <%= d.active %>">
                                     <h5><%= d.name %></h5>
                                     <hr>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsum numquam soluta! Provident autem tenetur nam accusantium aliquid velit officia iste recusandae id omnis dignissimos voluptatem aspernatur vero at, nesciunt amet aut deserunt ducimus optio error odio odit aliquam reprehenderit laborum. Sed inventore ea illo autem, quod dolores tempore nisi!</p>
-                                </div>
+                                    <p style="display: flex; justify-content: space-between;"><span>Totale Pazienti: </span><%= d.data.totalePazienti %></p>
+                                    <p style="display: flex; justify-content: space-between;"><span>Inizio: </span><%= d.data.inizio %></p>
+                                    <p style="display: flex; justify-content: space-between;"><span>Fine: </span><%= d.data.fine %></p>
+                                    <p style="display: flex; justify-content: space-between;"><span>Massimo: </span><%= d.data.massimo %></p>
+                                    <p style="display: flex; justify-content: space-between;"><span>Decessi: </span><%= d.data.decessi %></p>
+                                </div> 
                             <% }); %>
-
-                            <div class="carousel-item active carousel" data-bs-interval="10000">
-                                <h5>MALATTIA 1</h5>
-                                <hr>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsum numquam soluta! Provident autem tenetur nam accusantium aliquid velit officia iste recusandae id omnis dignissimos voluptatem aspernatur vero at, nesciunt amet aut deserunt ducimus optio error odio odit aliquam reprehenderit laborum. Sed inventore ea illo autem, quod dolores tempore nisi!</p>
-                            </div>
-                            <div class="carousel-item" data-bs-interval="2000">
-                                <h5>MALATTIA 2</h5>
-                                <hr>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsum numquam soluta! Provident autem tenetur nam accusantium aliquid velit officia iste recusandae id omnis dignissimos voluptatem aspernatur vero at, nesciunt amet aut deserunt ducimus optio error odio odit aliquam reprehenderit laborum. Sed inventore ea illo autem, quod dolores tempore nisi!</p>
-                            </div>
-                            <div class="carousel-item">
-                                <h5>MALATTIA 3</h5>
-                                <hr>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsum numquam soluta! Provident autem tenetur nam accusantium aliquid velit officia iste recusandae id omnis dignissimos voluptatem aspernatur vero at, nesciunt amet aut deserunt ducimus optio error odio odit aliquam reprehenderit laborum. Sed inventore ea illo autem, quod dolores tempore nisi!</p>
-                            </div>
-
-                            
-
-
-
 
                             
                         </div>

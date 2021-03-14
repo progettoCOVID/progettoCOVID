@@ -1,5 +1,3 @@
-// import { getX, getY, getDates } from './getChartValues.js';
-
 let chartDataIdrox = document.getElementById("chart-data").dataset.chartidrox;
 let chartDataGlico = document.getElementById("chart-data").dataset.chartglico;
 let chartDataOssigeno = document.getElementById("chart-data").dataset.chartossigeno;
@@ -32,7 +30,6 @@ chartDataEparine = Object.values(chartDataEparine['nslDateEparine']) */
 // Gennaio, Febbraio, Marzo, Aprile, Maggio, Giugno, Luglio, Agosto, Settembre, Ottobre, Novembre, Dicembre
 const months = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
 const months_restr = ['GEN', 'FEB', 'MAR', 'APR', 'MAG', 'GIU', 'LUG', 'AGO', 'SET', 'OTT', 'NOV', 'DIC']
-const days_in_months = ['31', '29', '31', '30', '31', '30', '31', '31', '30', '31', '30', '31'];
 
 
 const getX = chartData => {
@@ -82,7 +79,7 @@ const getDates = (dataX, dataY) => {
 
 
 /* IDROX */
-let dataXIdrox = getX(chartDataIdrox);
+let dataXIdrox = getX(chartDataIdrox)
 let dataYIdrox = getY(dataXIdrox, chartDataIdrox)
 var datesIdrox = getDates(dataXIdrox, dataYIdrox)
 var dates2Idrox = datesIdrox.sort((a, b) => b.x - a.x);
@@ -129,8 +126,6 @@ let dataXVitamine = getX(chartDataVitamine)
 let dataYVitamine = getY(dataXVitamine, chartDataVitamine)
 var datesVitamine = getDates(dataXVitamine, dataYVitamine)
 var dates2Vitamine = datesVitamine.sort((a, b) => b.x - a.x)
-
-
 
 const ctx = document.getElementById("chart").getContext("2d");
 const chart = new Chart(ctx, {
