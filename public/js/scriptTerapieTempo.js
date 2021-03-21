@@ -1,6 +1,6 @@
 let chartDataIdrox = document.getElementById("chart-data").dataset.chartidrox;
 let chartDataGlico = document.getElementById("chart-data").dataset.chartglico;
-let chartDataOssigeno = document.getElementById("chart-data").dataset.chartossigeno;
+/* let chartDataOssigeno = document.getElementById("chart-data").dataset.chartossigeno; */
 let chartDataAntibiotici = document.getElementById("chart-data").dataset.chartantibiotici;
 let chartDataAntivirali = document.getElementById("chart-data").dataset.chartantivirali;
 let chartDataVitamine = document.getElementById('chart-data').dataset.chartvitamine;
@@ -12,8 +12,8 @@ chartDataIdrox = Object.values(chartDataIdrox['nslDateIdrox'])
 chartDataGlico = JSON.parse(chartDataGlico)
 chartDataGlico = Object.values(chartDataGlico['nslDateGlico'])
 
-chartDataOssigeno = JSON.parse(chartDataOssigeno)
-chartDataOssigeno = Object.values(chartDataOssigeno['nslDateOssigeno'])
+/* chartDataOssigeno = JSON.parse(chartDataOssigeno)
+chartDataOssigeno = Object.values(chartDataOssigeno['nslDateOssigeno']) */
 
 chartDataAntibiotici = JSON.parse(chartDataAntibiotici)
 chartDataAntibiotici = Object.values(chartDataAntibiotici['nslDateAntibiotici'])
@@ -93,10 +93,10 @@ var dates2Glico = datesGlico.sort((a, b) => b.x - a.x);
 
 
 /* OSSIGENO */
-let dataXOssigeno = getX(chartDataOssigeno)
+/* let dataXOssigeno = getX(chartDataOssigeno)
 let dataYOssigeno = getY(dataXOssigeno, chartDataOssigeno)
 var datesOssigeno = getDates(dataXOssigeno, dataYOssigeno)
-var dates2Ossigeno = datesOssigeno.sort((a, b) => b.x - a.x);
+var dates2Ossigeno = datesOssigeno.sort((a, b) => b.x - a.x); */
 
 
 /* ANTIBIOTICI */
@@ -145,13 +145,13 @@ const chart = new Chart(ctx, {
             fill: false,
             data: dates2Glico
         },
-        {
+        /* {
             label: 'Ossigeno',
             borderColor: 'lightblue',
             backgroundColor: 'lightblue',
             fill: false,
             data: dates2Ossigeno
-        },
+        }, */
         {
             label: 'Antibiotici',
             borderColor: 'white',

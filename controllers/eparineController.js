@@ -7,14 +7,15 @@ db.serialize(() => {
     db.each("SELECT DataSomministrazione, Nosologico, Dosaggio " +
         "FROM Prescrizioni INNER JOIN Farmaci ON Farmaci.Codice = Prescrizioni.CodiceFarmaco " +
         "WHERE Farmaci.ATC4 LIKE 'eparin%' ORDER BY DataSomministrazione, Nosologico", (err, row) => {
-            // nslDateEparine.push(row['prs_date'].split(' ')[0] + "," + row['prs_nsl_num'])
-            // nslDateEparine.push(row['prs_date'].split(' ')[0] + "," + row['prs_nsl_num'] + ", " + row['prs_dos'].split(' ')[0]);
-            let r = {};
-            r.prs_date = row['DataSomministrazione'].split(' ')[0];
-            r.prs_nsl_num = row['Nosologico'];
-            r.prs_dos = row['Dosaggio'].split(' ')[0];
 
-            tmpData.push(r);
+            if ((row['Dosaggio'].split(' ')[0] * 1) > 5000) {
+                let r = {};
+                r.prs_date = row['DataSomministrazione'].split(' ')[0];
+                r.prs_nsl_num = row['Nosologico'];
+                r.prs_dos = row['Dosaggio'].split(' ')[0];
+
+                tmpData.push(r);
+            }
         })
 });
 db.close();

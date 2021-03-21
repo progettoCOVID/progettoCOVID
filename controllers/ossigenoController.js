@@ -1,4 +1,4 @@
-const sqlite3 = require('sqlite3').verbose();
+/* const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/tabella.db');
 
 var nslDateOssigeno = [{}];
@@ -15,4 +15,4 @@ exports.get_dates = () => {
     return JSON.stringify({
         nslDateOssigeno
     });
-};
+}; */

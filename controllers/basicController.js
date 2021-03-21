@@ -4,7 +4,7 @@ const db = new sqlite3.Database('./db/tabella.db')
 const charts = require('../fakedbchart');
 const idroxController = require('../controllers/idroxController')
 const glicoController = require('../controllers/glicoController')
-const ossigenoController = require('../controllers/ossigenoController')
+/* const ossigenoController = require('../controllers/ossigenoController') */
 const antibioticiController = require('../controllers/antibioticiController')
 const antiviraliController = require('../controllers/antiviraliController')
 const eparineController = require('../controllers/eparineController')
@@ -110,7 +110,7 @@ exports.get_home = (req, res) => {
 const get_terapietempo = req => {
     const dataIdrox = idroxController.get_dates();
     const dataGlico = glicoController.get_dates();
-    const dataOssigeno = ossigenoController.get_dates();
+    /* const dataOssigeno = ossigenoController.get_dates(); */
     const dataAntibiotici = antibioticiController.get_dates();
     const dataEparine = eparineController.get_dates();
     const dataAntivirali = antiviraliController.get_dates()
@@ -132,11 +132,11 @@ const get_terapietempo = req => {
     const fullGlico = getDates(XGlico, YGlico)
 
     // OSSIGENO
-    let chartDataOssigeno = JSON.parse(dataOssigeno)
+    /* let chartDataOssigeno = JSON.parse(dataOssigeno)
     chartDataOssigeno = Object.values(chartDataOssigeno['nslDateOssigeno'])
     const XOssigeno = getX(chartDataOssigeno)
     const YOssigeno = getY(XOssigeno, chartDataOssigeno)
-    const fullOssigeno = getDates(XOssigeno, YOssigeno)
+    const fullOssigeno = getDates(XOssigeno, YOssigeno) */
 
     // ANTIBIOTICI
     let chartDataAntibiotici = JSON.parse(dataAntibiotici)
@@ -182,7 +182,7 @@ const get_terapietempo = req => {
             },
             'active': ''
         },
-        {
+        /* {
             'name': 'Ossigeno',
             'data': {
                 totalePazienti: getPazientiTotali(chartDataOssigeno),
@@ -192,7 +192,7 @@ const get_terapietempo = req => {
                 decessi: 'NaN'
             },
             'active': ''
-        },
+        }, */
         {
             'name': 'Antibiotici',
             'data': {
@@ -234,7 +234,7 @@ const get_terapietempo = req => {
                             charts: chartsArray, 
                             dataIdrox: dataIdrox,
                             dataGlico: dataGlico,
-                            dataOssigeno: dataOssigeno,
+                            /* dataOssigeno: dataOssigeno, */
                             dataAntibiotici: dataAntibiotici,
                             dataAntivirali: dataAntivirali,
                             dataEparine: dataEparine,
